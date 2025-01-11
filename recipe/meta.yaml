@@ -12,18 +12,21 @@ source:
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
+    - setuptools
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - numpy
     - numba  # technically optional but better to always have it
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - parallel_statistics
 
